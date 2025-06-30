@@ -5,16 +5,13 @@
 import os
 import pandas as pd
 import streamlit as st
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, inspect
 from sqlalchemy.exc import SQLAlchemyError
-
-import urllib.parse
-
 import plotly.graph_objects as go
 import plotly.express as px
 from st_aggrid import AgGrid, GridOptionsBuilder
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
 if "data_loaded" not in st.session_state:
     try:
@@ -22,6 +19,7 @@ if "data_loaded" not in st.session_state:
         engine = create_engine(db_url, pool_pre_ping=True)
         st.session_state["engine"] = engine
 
+        inspector = inspect(engine)
         data_folder = "data"
 
         if not os.path.exists(data_folder):
@@ -32,6 +30,10 @@ if "data_loaded" not in st.session_state:
                 if filename.endswith(".csv"):
                     filepath = os.path.join(data_folder, filename)
                     table_name = filename.replace(".csv", "").lower()
+
+                    if table_name in inspector.get_table_names():
+                        st.info(f"⏩ Table `{table_name}` already exists. Skipping load.")
+                        continue
                     
                     try:
                         df = pd.read_csv(filepath, encoding="latin1")
