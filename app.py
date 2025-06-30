@@ -584,7 +584,7 @@ def show_insights():
     #                 - The second most common (~25% of total abandonned listings) abandonment point was on the "delete draft" action, suggesting that sellers could have been frustrated with the listing process or changed their mind and chose to delete their drafts rather than complete them.
     #             """)
     data = {
-        "Area": [
+        "KPI": [
             "Listing Completion Rate (85%)",
             "Category Popularity (# of listings)",
             "Sales Conversion (17%)",
@@ -624,7 +624,7 @@ def show_insights():
         resizable=True
     )
     gb.configure_column(
-        "Area",
+        "KPI",
         cellClass="bold-cell"
     )
     gb.configure_grid_options(domLayout='autoHeight')
