@@ -5,3 +5,4 @@ __pycache__/
 .streamlit/
 .env
 *.log
+local_test.py

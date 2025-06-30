@@ -1,4 +1,8 @@
-streamlit
+streamlit==1.46
 pandas
+numpy<2
+numexpr<2.11
 sqlalchemy
 psycopg2-binary
+plotly
+streamlit-aggrid
