@@ -50,9 +50,6 @@ if "data_loaded" not in st.session_state:
             st.session_state["data_loaded"] = True
             st.session_state["files_loaded"] = files_loaded
 
-            if not files_loaded:
-                st.warning("No CSV files found or loaded in data directory.")
-
     except SQLAlchemyError as db_err:
         st.error(f"Database connection error: {db_err}")
     except Exception as e:
